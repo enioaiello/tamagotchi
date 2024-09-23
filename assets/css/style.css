@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    transition: 200ms ease-in-out;
+    user-select: none;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+body .container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body .container #loading {
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 3rem;
+}
+
+@keyframes loading {
+    0% {
+        box-shadow: rgba(149, 157, 165, 0.2) 0 2px 6px;
+    }
+    50% {
+        box-shadow: rgba(149, 157, 165, 0.2) 0 16px 48px;
+    }
+    100% {
+        box-shadow: rgba(149, 157, 165, 0.2) 0 2px 6px;
+    }
+}
+
+body .container #loading img {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: loading 3s infinite;
+}
+
+body .container #start {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+body .container #start * {
+    margin: 1vh 0;
+}
+
+body .container #start img {
+    width: 100%;
+}
+
+body .container #start h2 {
+    width: 100%;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+body .container #start p {
+    width: 100%;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+body .container #start p small a {
+    color: #f9f9f9;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body .container #start button {
+    width: 100%;
+    padding: 5%;
+    background-color: #134074;
+    color: #f9f9f9;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+body .container #start button:hover {
+    background-color: #0c2c4e;
+}
+
+body .container #save {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+body .container #save * {
+    margin: 2vh 0;
+}
+
+body .container #save h2 {
+    width: 100%;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+body .container #save #saves {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body .container #menu {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+body .container #menu * {
+    margin: 2vh 0;
+}
+
+body .container #menu h2 {
+    width: 100%;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+body .container #menu #buttons {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body .container #menu #buttons #startGame,
+body .container #menu #buttons #settings,
+body .container #menu #buttons #github,
+body .container #save #saves #newSave,
+body .container #save #saves #loadSave,
+body .container #save #saves #backSave {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1vw;
+    padding: 5%;
+    background-color: #134074;
+    color: #f9f9f9;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+body .container #menu #buttons #startGame:hover,
+body .container #menu #buttons #settings:hover,
+body .container #menu #buttons #github:hover,
+body .container #save #saves #newSave:hover,
+body .container #save #saves #loadSave:hover,
+body .container #save #saves #backSave:hover {
+    background-color: #0c2c4e;
+}
+
+body .container #register {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+body .container #register * {
+    margin: 2vh 0;
+}
+
+body .container #register h2 {
+    width: 100%;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+body .container #register form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body .container #register form label {
+    width: 25%;
+}
+
+body .container #register form label input {
+    width: 100%;
+    padding: 10px;
+    margin: 1vh 0;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body .container #register form label input:hover {
+    outline: 3px solid #134074;
+}
+
+body .container #register form button {
+    width: 5%;
+    padding: 10px;
+    background-color: #134074;
+    color: #f9f9f9;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+body .container #register form button:hover {
+    background-color: #0c2c4e;
+}
+
+body .container #game {
+    width: 25%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+body .container #game #tamagotchiContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body .container #game * {
+    margin: 2vh 0;
+}
+
+body .container #game h2 {
+    width: 100%;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+body .container #stats {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body .container #stats * {
+    padding: 1%;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+body .container #actions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body .container #actions * {
+    padding: 1%;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+body .container #actions button {
+    width: 100%;
+    padding: 5%;
+    margin: 0 1%;
+    font-size: 1.3rem;
+    background-color: #134074;
+    color: #f9f9f9;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+body .container #actions button:hover {
+    background-color: #0c2c4e;
+}
+
+.end {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 3rem;
+}
+
+.end * {
+    animation: endMessage 3s infinite;
+}
+
+@keyframes endMessage {
+    0% {
+        color: #ffffffaa;
+    }
+    50% {
+        color: #ffffff;
+    }
+    100% {
+        color: #ffffffaa;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        color: #f9f9f9;
+    }
+}

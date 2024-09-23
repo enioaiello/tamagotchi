@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tamagotchi</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="icon" href="./assets/img/tamagotchi.png">
+    <script src="https://kit.fontawesome.com/127f7eda6e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="loading">
+            <img src="./assets/img/logo.png" alt="Logo">
+        </div>
+        <div id="start">
+            <img src="./assets/img/tamagotchi.png" alt="Tamagotchi">
+            <h1>Tamagotchi</h1>
+            <p><small>Par <a href="https://enioaiello.github.io/" target="_blank">Enio Aiello</a></small></p>
+            <button id="launchGame" title="Commencer"><i class="fa-solid fa-play"></i></button>
+        </div>
+        <div id="menu">
+            <h2>Menu</h2>
+            <div id="buttons">
+                <button id="startGame" title="Démarrer"><i class="fa-solid fa-play"></i></button>
+                <button id="settings" title="Paramètres"><i class="fa-solid fa-gear"></i></button>
+                <button id="github" title="Code source"><i class="fa-brands fa-github"></i></button>
+            </div>
+        </div>
+        <div id="save">
+            <h2>Sauvegardes</h2>
+            <div id="saves">
+                <div id="newSave" title="Nouvelle sauvegarde">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div id="loadSave" title="Charger la sauvegarde">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+                <div id="backSave" title="Revenir à l'accueil">
+                    <i class="fa-solid fa-door-open"></i>
+                </div>
+            </div>
+        </div>
+        <div id="register">
+            <h2>Mon Tamagotchi</h2>
+            <form>
+                <label>
+                    <input type="text" placeholder="Prénom" id="nameInput">
+                </label>
+                <button id="registerName" title="Continuer"><i class="fa-solid fa-check"></i></button>
+            </form>
+        </div>
+        <div id="game">
+            <div id="tamagotchi">
+                <div id="tamagotchiContent">
+                    <img src="./assets/img/tamagotchi.png" alt="Tamagotchi">
+                    <h2 id="name">Nom</h2>
+                </div>
+                <div id="stats">
+                    <div id="hunger">
+                        <span><i class="fa-solid fa-burger"></i></span>
+                        <progress value="100" max="100" id="hungerProgress"></progress>
+                    </div>
+                    <div id="happiness">
+                        <span><i class="fa-solid fa-face-smile"></i></span>
+                        <progress value="100" max="100"></progress>
+                    </div>
+                    <div id="health">
+                        <span><i class="fa-solid fa-suitcase-medical"></i></span>
+                        <progress value="100" max="100"></progress>
+                    </div>
+                </div>
+            </div>
+            <div id="actions">
+                <button id="feed" title="Nourrir"><i class="fa-solid fa-burger"></i></button>
+                <button id="play" title="Jouer"><i class="fa-solid fa-gamepad"></i></button>
+                <button id="heal" title="Soigner"><i class="fa-solid fa-suitcase-medical"></i></button>
+                <button id="saveGame" title="Sauvegarder et quitter"><i class="fa-solid fa-floppy-disk"></i></button>
+                <button id="deleteGame" title="Supprimer et quitter"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>
+         <div class="end">
+            <h2>Game Over</h2>
+        </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
