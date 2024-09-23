@@ -32,10 +32,48 @@ function Tamagotchi() {
         }
     }
 
-    this.randomDelay = function() {
-        const min = 2.5 * 1000;
-        const max = 8.5 * 1000;
-        return Math.random() * (max - min) + min;
+    this.happinessFunction = function() {
+        if (document.querySelector("#game").style.display === "block") {
+            if (thisTamagotchi.happiness > 0) {
+                thisTamagotchi.happiness -= 1;
+                console.log("Happiness: " + thisTamagotchi.happiness);
+            } else {
+                showEndPage();
+            }
+
+            displayProgressTitle();
+        }
+    }
+
+    this.healthFunction = function() {
+        if (document.querySelector("#game").style.display === "block") {
+            if (thisTamagotchi.health > 0) {
+                thisTamagotchi.health -= 1;
+                console.log("Health: " + thisTamagotchi.health);
+            } else {
+                showEndPage();
+            }
+
+            displayProgressTitle();
+        }
+    }
+
+    this.randomDelay = function(category) {
+        if (category === "hungry") {
+            const min = 2.5 * 1000;
+            const max = 8.5 * 1000;
+            return Math.random() * (max - min) + min;
+        }
+        if (category === "happy") {
+            const min = 5.1 * 1000;
+            const max = 12.5 * 1000;
+            return Math.random() * (max - min) + min;
+        }
+        if (category === "health") {
+            const min = 15 * 1000;
+            const max = 30 * 1000;
+            return Math.random() * (max - min) + min;
+        }
     }
 }
 
@@ -47,7 +85,19 @@ const hungerProgress = document.querySelector("#hungerProgress");
 // Déclaration des variables d'alimentation
 let hungry = setInterval(() => {
     if (document.querySelector("#game").style.display === "block") {
-        myTamagotchi.hungerFunction();
+        myTamagotchi.hungerFunction("hungry");
+    }
+}, myTamagotchi.randomDelay());
+
+let happy = setInterval(() => {
+    if (document.querySelector("#game").style.display === "block") {
+        myTamagotchi.happinessFunction("happy");
+    }
+}, myTamagotchi.randomDelay());
+
+let health = setInterval(() => {
+    if (document.querySelector("#game").style.display === "block") {
+        myTamagotchi.healthFunction("health");
     }
 }, myTamagotchi.randomDelay());
 
@@ -74,6 +124,8 @@ const registerNameButton = document.querySelector("#registerName");
 const nameTitle = document.querySelector("#name");
 const progressBars = document.querySelectorAll("progress");
 const feedButton = document.querySelector("#feed");
+const happinessButton = document.querySelector("#happiness");
+const healthButton = document.querySelector("#health");
 
 // Création des fonctions
 function initGame() {
@@ -219,11 +271,21 @@ function registerName(e) {
 
 function loadSave() {
     console.log("Chargement de la sauvegarde");
+    myTamagotchi.name = localStorage.getItem("name");
+    myTamagotchi.age = localStorage.getItem("age");
+    myTamagotchi.hunger = localStorage.getItem("hunger");
+    myTamagotchi.health = localStorage.getItem("health");
+    myTamagotchi.happiness = localStorage.getItem("happiness");
     showGamePage();
 }
 
 function saveGame() {
     console.log("Sauvegarde de la partie");
+    localStorage.setItem("name", myTamagotchi.name);
+    localStorage.setItem("age", myTamagotchi.age);
+    localStorage.setItem("hunger", myTamagotchi.hunger);
+    localStorage.setItem("health", myTamagotchi.health);
+    localStorage.setItem("happiness", myTamagotchi.happiness);
 }
 
 function showSettingsPage() {
@@ -245,7 +307,7 @@ githubButton.addEventListener("click", () => {
     window.open("https://github.com/enioaiello/tamagotchi", "_blank");
 });
 newSaveButton.addEventListener("click", showRegisterPage);
-// loadSaveButton.addEventListener("click", loadSave);
+loadSaveButton.addEventListener("click", loadSave);
 registerNameButton.addEventListener("click", registerName);
 backSaveButton.addEventListener("click", showMenuPage);
 feedButton.addEventListener("click", () => {
@@ -256,8 +318,5 @@ feedButton.addEventListener("click", () => {
         }
         hungerProgress.value = myTamagotchi.hunger;
         displayProgressTitle();
-    } else {
-        console.log("Je n'ai pas faim !");
     }
-    console.log(myTamagotchi.hunger);
 });
