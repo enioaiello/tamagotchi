@@ -73,6 +73,7 @@ const registerNameButton = document.querySelector("#registerName");
 // Déclaration des variables du jeu
 const nameTitle = document.querySelector("#name");
 const progressBars = document.querySelectorAll("progress");
+const feedButton = document.querySelector("#feed");
 
 // Création des fonctions
 function initGame() {
@@ -247,3 +248,16 @@ newSaveButton.addEventListener("click", showRegisterPage);
 // loadSaveButton.addEventListener("click", loadSave);
 registerNameButton.addEventListener("click", registerName);
 backSaveButton.addEventListener("click", showMenuPage);
+feedButton.addEventListener("click", () => {
+    if (myTamagotchi.hunger < 100) {
+        myTamagotchi.hunger += 10;
+        if (myTamagotchi.hunger > 100) {
+            myTamagotchi.hunger = 100;
+        }
+        hungerProgress.value = myTamagotchi.hunger;
+        displayProgressTitle();
+    } else {
+        console.log("Je n'ai pas faim !");
+    }
+    console.log(myTamagotchi.hunger);
+});
