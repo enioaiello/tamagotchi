@@ -10,11 +10,11 @@ function Tamagotchi() {
     this.happiness = 100;
 
     this.init = function() {
-        thisTamagotchi.name = localStorage.getItem("name");
+        thisTamagotchi.name = localStorage.getItem("name") || "";
         thisTamagotchi.age = 0;
-        thisTamagotchi.hunger = 100;
-        thisTamagotchi.health = 100;
-        thisTamagotchi.happiness = 100;
+        thisTamagotchi.hunger = parseInt(localStorage.getItem("hunger"), 10) || 100;
+        thisTamagotchi.health = parseInt(localStorage.getItem("health"), 10) || 100;
+        thisTamagotchi.happiness = parseInt(localStorage.getItem("happiness"), 10) || 100;
     }
 
     this.hungerFunction = function() {
@@ -28,7 +28,7 @@ function Tamagotchi() {
 
             hungerProgress.value = thisTamagotchi.hunger;
 
-            displayProgressTitle();
+            displayProgressTitle("hunger");
         }
     }
 
@@ -41,7 +41,7 @@ function Tamagotchi() {
                 showEndPage();
             }
 
-            displayProgressTitle();
+            displayProgressTitle("happiness");
         }
     }
 
@@ -54,7 +54,7 @@ function Tamagotchi() {
                 showEndPage();
             }
 
-            displayProgressTitle();
+            displayProgressTitle("health");
         }
     }
 
@@ -77,7 +77,6 @@ function Tamagotchi() {
     }
 }
 
-
 // Déclaration des variables globales
 let myTamagotchi = new Tamagotchi();
 const hungerProgress = document.querySelector("#hungerProgress");
@@ -87,19 +86,19 @@ let hungry = setInterval(() => {
     if (document.querySelector("#game").style.display === "block") {
         myTamagotchi.hungerFunction("hungry");
     }
-}, myTamagotchi.randomDelay());
+}, myTamagotchi.randomDelay("hungry"));
 
 let happy = setInterval(() => {
     if (document.querySelector("#game").style.display === "block") {
         myTamagotchi.happinessFunction("happy");
     }
-}, myTamagotchi.randomDelay());
+}, myTamagotchi.randomDelay("happy"));
 
 let health = setInterval(() => {
     if (document.querySelector("#game").style.display === "block") {
         myTamagotchi.healthFunction("health");
     }
-}, myTamagotchi.randomDelay());
+}, myTamagotchi.randomDelay("health"));
 
 // Déclaration des pages
 const loadingPage = document.querySelector("#loading");
@@ -119,6 +118,7 @@ const newSaveButton = document.querySelector("#newSave");
 const loadSaveButton = document.querySelector("#loadSave");
 const backSaveButton = document.querySelector("#backSave");
 const registerNameButton = document.querySelector("#registerName");
+const reasonLabel = document.querySelector("#reason");
 
 // Déclaration des variables du jeu
 const nameTitle = document.querySelector("#name");
@@ -126,6 +126,8 @@ const progressBars = document.querySelectorAll("progress");
 const feedButton = document.querySelector("#feed");
 const happinessButton = document.querySelector("#happiness");
 const healthButton = document.querySelector("#health");
+const saveGameButton = document.querySelector("#saveGame");
+const deleteGameButton = document.querySelector("#deleteGame");
 
 // Création des fonctions
 function initGame() {
@@ -182,7 +184,6 @@ function showMenuPage() {
     gamePage.style.display = "none";
     // Masquer la page de fin
     endPage.style.display = "none";
-    // hunger(false);
 }
 
 function showSavePage() {
@@ -243,7 +244,7 @@ function showGamePage() {
     displayProgressTitle();
 }
 
-function showEndPage() {
+function showEndPage(reason) {
     // Afficher la page de fin
     endPage.style.display = "flex ";
     // Masquer la page de chargement
@@ -259,6 +260,20 @@ function showEndPage() {
     // Masquer la page de jeu
     gamePage.style.display = "none";
 
+    localStorage.clear();
+
+    if (reason === "hunger") {
+        reasonLabel.textContent = "Votre Tamagotchi est mort de faim.";
+    } else if (reason === "happiness") {
+        reasonLabel.textContent = "Votre Tamagotchi est mort de tristesse.";
+    } else if (reason === "health") {
+        reasonLabel.textContent = "Votre Tamagotchi est mort de maladie.";
+    } else if (reason === "old") {
+        reasonLabel.textContent = "Votre Tamagotchi est mort de vieillesse.";
+    } else if (reason === "delete") {
+        reasonLabel.textContent = "Votre Tamagotchi a été supprimé.";
+    }
+
     setTimeout(showMenuPage, 5000);
 }
 
@@ -272,10 +287,14 @@ function registerName(e) {
 function loadSave() {
     console.log("Chargement de la sauvegarde");
     myTamagotchi.name = localStorage.getItem("name");
-    myTamagotchi.age = localStorage.getItem("age");
-    myTamagotchi.hunger = localStorage.getItem("hunger");
-    myTamagotchi.health = localStorage.getItem("health");
-    myTamagotchi.happiness = localStorage.getItem("happiness");
+    nameTitle.textContent = myTamagotchi.name;
+    myTamagotchi.age = parseInt(localStorage.getItem("age"), 10);
+    myTamagotchi.hunger = parseInt(localStorage.getItem("hunger"), 10);
+    progressBars[0].value = myTamagotchi.hunger;
+    myTamagotchi.happiness = parseInt(localStorage.getItem("happiness"), 10);
+    progressBars[1].value = myTamagotchi.happiness;
+    myTamagotchi.health = parseInt(localStorage.getItem("health"), 10);
+    progressBars[2].value = myTamagotchi.health;
     showGamePage();
 }
 
@@ -286,16 +305,29 @@ function saveGame() {
     localStorage.setItem("hunger", myTamagotchi.hunger);
     localStorage.setItem("health", myTamagotchi.health);
     localStorage.setItem("happiness", myTamagotchi.happiness);
+    showMenuPage();
 }
 
 function showSettingsPage() {
     console.log("Affichage des paramètres");
 }
 
-function displayProgressTitle() {
-    progressBars.forEach(progressBar => {
-        progressBar.title = progressBar.value + "%";
-    });
+function displayProgressTitle(category) {
+    if (category === "hunger") {
+        progressBars[0].title = "Faim: " + myTamagotchi.hunger + "%";
+        progressBars[0].value = myTamagotchi.hunger;
+        localStorage.setItem("hunger", myTamagotchi.hunger);
+    }
+    if (category === "happiness") {
+        progressBars[1].title = "Bonheur: " + myTamagotchi.happiness + "%";
+        progressBars[1].value = myTamagotchi.happiness;
+        localStorage.setItem("happiness", myTamagotchi.happiness);
+    }
+    if (category === "health") {
+        progressBars[2].title = "Santé: " + myTamagotchi.health + "%";
+        progressBars[2].value = myTamagotchi.health;
+        localStorage.setItem("health", myTamagotchi.health);
+    }
 }
 
 // Création des événements
@@ -319,4 +351,36 @@ feedButton.addEventListener("click", () => {
         hungerProgress.value = myTamagotchi.hunger;
         displayProgressTitle();
     }
+});
+happinessButton.addEventListener("click", () => {
+    if (myTamagotchi.happiness < 100) {
+        myTamagotchi.happiness += 10;
+        if (myTamagotchi.happiness > 100) {
+            myTamagotchi.happiness = 100;
+        }
+        hungerProgress.value = myTamagotchi.happiness;
+        displayProgressTitle("happiness");
+    }
+});
+healthButton.addEventListener("click", () => {
+    if (myTamagotchi.health < 100) {
+        myTamagotchi.health += 10;
+        if (myTamagotchi.health > 100) {
+            myTamagotchi.health = 100;
+        }
+        hungerProgress.value = myTamagotchi.health;
+        displayProgressTitle("health");
+    }
+});
+saveGameButton.addEventListener("click", saveGame);
+deleteGameButton.addEventListener("click", () => {
+    document.querySelector("#tamagotchiContent img").src = "./assets/img/explosion.png";
+
+    setTimeout(() => {
+        localStorage.clear();
+        clearInterval(hungry);
+        clearInterval(happy);
+        clearInterval(health);
+        showEndPage("delete");
+    }, 2500);
 });

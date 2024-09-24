@@ -327,11 +327,11 @@ body .container #actions button:hover {
     justify-content: center;
     background-color: #000000;
     color: #ffffff;
-    font-size: 3rem;
 }
 
-.end * {
+.end h2 {
     animation: endMessage 3s infinite;
+    font-size: 3.5rem;
 }
 
 @keyframes endMessage {
