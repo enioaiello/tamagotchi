@@ -80,6 +80,7 @@ function Tamagotchi() {
 // Déclaration des variables globales
 let myTamagotchi = new Tamagotchi();
 const hungerProgress = document.querySelector("#hungerProgress");
+const apparence = ['cat.png', 'dog.png', 'fish.png', 'fox.png', 'koala.png', 'panda.png', 'polarBear.png'];
 
 // Déclaration des variables d'alimentation
 let hungry = setInterval(() => {
@@ -128,6 +129,10 @@ const happinessButton = document.querySelector("#happiness");
 const healthButton = document.querySelector("#health");
 const saveGameButton = document.querySelector("#saveGame");
 const deleteGameButton = document.querySelector("#deleteGame");
+
+// Déclaration de la variable pour l'image du Tamagotchi
+const tamagotchiImage = document.querySelector("#tamagotchiImage");
+const animalSelect = document.querySelector("#animal");
 
 // Création des fonctions
 function initGame() {
@@ -187,6 +192,12 @@ function showMenuPage() {
 }
 
 function showSavePage() {
+    if (!localStorage.getItem("name")) {
+        loadSaveButton.style.display = "none";
+    } else {
+        loadSaveButton.style.display = "flex";
+    }
+
     // Afficher la page de sauvegarde
     savePage.style.display = "block";
     // Masquer la page de chargement
@@ -263,15 +274,15 @@ function showEndPage(reason) {
     localStorage.clear();
 
     if (reason === "hunger") {
-        reasonLabel.textContent = "Votre Tamagotchi est mort de faim.";
+        reasonLabel.textContent = myTamagotchi.name + " est mort de faim.";
     } else if (reason === "happiness") {
-        reasonLabel.textContent = "Votre Tamagotchi est mort de tristesse.";
+        reasonLabel.textContent = myTamagotchi.name + " est mort de tristesse.";
     } else if (reason === "health") {
-        reasonLabel.textContent = "Votre Tamagotchi est mort de maladie.";
+        reasonLabel.textContent = myTamagotchi.name + " est mort de maladie.";
     } else if (reason === "old") {
-        reasonLabel.textContent = "Votre Tamagotchi est mort de vieillesse.";
+        reasonLabel.textContent = myTamagotchi.name + " est mort de vieillesse.";
     } else if (reason === "delete") {
-        reasonLabel.textContent = "Votre Tamagotchi a été supprimé.";
+        reasonLabel.textContent = myTamagotchi.name + " a été supprimé.";
     }
 
     setTimeout(showMenuPage, 5000);
@@ -310,6 +321,14 @@ function saveGame() {
 
 function showSettingsPage() {
     console.log("Affichage des paramètres");
+}
+
+// Fonction pour mettre à jour l'image du Tamagotchi
+function updateTamagotchiImage() {
+    const selectedAnimal = animalSelect.value;
+    tamagotchiImage.src = `assets/img/${selectedAnimal}.png`;
+    document.querySelector("#tamagotchiHome").src = `assets/img/${selectedAnimal}.png`;
+    document.querySelector("link[rel='icon']").href = `assets/img/${selectedAnimal}.png`;
 }
 
 function displayProgressTitle(category) {
@@ -375,6 +394,8 @@ healthButton.addEventListener("click", () => {
 saveGameButton.addEventListener("click", saveGame);
 deleteGameButton.addEventListener("click", () => {
     document.querySelector("#tamagotchiContent img").src = "./assets/img/explosion.png";
+    const explosion = new Audio("./assets/sounds/explosion.mp3");
+    explosion.play();
 
     setTimeout(() => {
         localStorage.clear();
@@ -384,3 +405,10 @@ deleteGameButton.addEventListener("click", () => {
         showEndPage("delete");
     }, 2500);
 });
+
+
+// Ajout de l'événement change sur le select
+animalSelect.addEventListener("change", updateTamagotchiImage);
+
+// Appel initial pour définir l'image en fonction de la valeur par défaut
+updateTamagotchiImage();

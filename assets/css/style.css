@@ -214,7 +214,8 @@ body .container #register form label {
     width: 25%;
 }
 
-body .container #register form label input {
+body .container #register form label input,
+body .container #register form label select {
     width: 100%;
     padding: 10px;
     margin: 1vh 0;
@@ -313,6 +314,7 @@ body .container #actions button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
+
 
 body .container #actions button:hover {
     background-color: #0c2c4e;

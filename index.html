@@ -15,7 +15,7 @@
             <img src="./assets/img/logo.png" alt="Logo">
         </div>
         <div id="start">
-            <img src="assets/img/fox.png" alt="Tamagotchi">
+            <img src="assets/img/fox.png" alt="Tamagotchi" id="tamagotchiHome">
             <h1>Tamagotchi</h1>
             <p><small>Par <a href="https://enioaiello.github.io/" target="_blank">Enio Aiello</a></small></p>
             <button id="launchGame" title="Commencer"><i class="fa-solid fa-play"></i></button>
@@ -48,13 +48,24 @@
                 <label>
                     <input type="text" placeholder="Prénom" id="nameInput">
                 </label>
+                <label>
+                    <select id="animal">
+                        <option value="fox">🦊 Renard</option>
+                        <option value="cat">😺 Chat</option>
+                        <option value="dog">🐶 Chien</option>
+                        <option value="fish">🐟 Poisson</option>
+                        <option value="koala">🐨 Koala</option>
+                        <option value="panda">🐼 Panda</option>
+                        <option value="polarBear">🐻‍❄️ Ours polaire</option>
+                    </select>
+                </label>
                 <button id="registerName" title="Continuer"><i class="fa-solid fa-check"></i></button>
             </form>
         </div>
         <div id="game">
             <div id="tamagotchi">
                 <div id="tamagotchiContent">
-                    <img src="assets/img/fox.png" alt="Tamagotchi">
+                    <img src="assets/img/fox.png" alt="Tamagotchi" id="tamagotchiImage">
                     <h2 id="name">Nom</h2>
                 </div>
                 <div id="stats">
