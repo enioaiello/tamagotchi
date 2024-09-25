@@ -13,29 +13,21 @@ Chaque action coûte de l'énergie à votre Tamagotchi, et si son énergie attei
 ## Fonctionnalités
 
 - Nourrir votre Tamagotchi
-- Laver votre Tamagotchi
+- Soigner votre Tamagotchi
 - Jouer avec votre Tamagotchi
 
-## Auteur
+## Captures d'écran
 
-- Enio Aiello
+![Capture d'écran 1](assets/img/screenshots/screenshot1.png)
+
+## À faire
+
+- Ajouter des mini-jeux
+
+## Historique des versions
+
+- **1.0.0 :** Version initiale
 
 ## Licence
 
-Ce projet est sous licence MIT.
-
-[//]: # (## Captures d'écran)
-
-[//]: # (![Capture d'écran 1](screenshots/screenshot1.png))
-
-[//]: # (## Remerciements)
-
-[//]: # (Ce projet a été inspiré par le jeu Tamagotchi de Bandai.)
-
-[//]: # (## À faire)
-
-[//]: # (- Ajouter des mini-jeux)
-
-[//]: # (## Historique des versions)
-
-[//]: # (- 1.0.0: Version initiale)
+Ce projet est sous [licence MIT](LICENSE).
