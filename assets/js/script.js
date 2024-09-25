@@ -80,6 +80,8 @@ function Tamagotchi() {
 // Déclaration des variables globales
 let myTamagotchi = new Tamagotchi();
 const hungerProgress = document.querySelector("#hungerProgress");
+const happinessProgress = document.querySelector("#happinessProgress");
+const healthProgress = document.querySelector("#healthProgress");
 const apparence = ['cat.png', 'dog.png', 'fish.png', 'fox.png', 'koala.png', 'panda.png', 'polarBear.png'];
 
 // Déclaration des variables d'alimentation
@@ -104,6 +106,7 @@ let health = setInterval(() => {
 // Déclaration des pages
 const loadingPage = document.querySelector("#loading");
 const startPage = document.querySelector("#start");
+const settingsPage = document.querySelector("#settingsPage");
 const menuPage = document.querySelector("#menu");
 const savePage = document.querySelector("#save");
 const registerPage = document.querySelector("#register");
@@ -119,6 +122,7 @@ const newSaveButton = document.querySelector("#newSave");
 const loadSaveButton = document.querySelector("#loadSave");
 const backSaveButton = document.querySelector("#backSave");
 const registerNameButton = document.querySelector("#registerName");
+const backSettingsButton = document.querySelector("#backSettings");
 const reasonLabel = document.querySelector("#reason");
 
 // Déclaration des variables du jeu
@@ -153,6 +157,8 @@ function initGame() {
     gamePage.style.display = "none";
     // Masquer la page de fin
     endPage.style.display = "none";
+    // Masquer la page des paramètres
+    settingsPage.style.display = "none";
 
     setTimeout(showStartPage, 3500);
 }
@@ -172,6 +178,8 @@ function showStartPage() {
     gamePage.style.display = "none";
     // Masquer la page de fin
     endPage.style.display = "none";
+    // Masquer la page des paramètres
+    settingsPage.style.display = "none";
 }
 
 function showMenuPage() {
@@ -189,6 +197,8 @@ function showMenuPage() {
     gamePage.style.display = "none";
     // Masquer la page de fin
     endPage.style.display = "none";
+    // Masquer la page des paramètres
+    settingsPage.style.display = "none";
 }
 
 function showSavePage() {
@@ -212,6 +222,8 @@ function showSavePage() {
     gamePage.style.display = "none";
     // Masquer la page de fin
     endPage.style.display = "none";
+    // Masquer la page des paramètres
+    settingsPage.style.display = "none";
 }
 
 function showRegisterPage() {
@@ -229,6 +241,8 @@ function showRegisterPage() {
     gamePage.style.display = "none";
     // Masquer la page de fin
     endPage.style.display = "none";
+    // Masquer la page des paramètres
+    settingsPage.style.display = "none";
 
     if (localStorage.getItem("name")) {
         document.querySelector("#nameInput").value = localStorage.getItem("name");
@@ -250,6 +264,8 @@ function showGamePage() {
     registerPage.style.display = "none";
     // Masquer la page de fin
     endPage.style.display = "none";
+    // Masquer la page des paramètres
+    settingsPage.style.display = "none";
 
     myTamagotchi.init();
     displayProgressTitle();
@@ -321,6 +337,18 @@ function saveGame() {
 
 function showSettingsPage() {
     console.log("Affichage des paramètres");
+    // Afficher la page des paramètres
+    settingsPage.style.display = "block";
+    // Masquer la page de démarrage
+    startPage.style.display = "none";
+    // Masquer la page de menu
+    menuPage.style.display = "none";
+    // Masquer la page de sauvegarde
+    savePage.style.display = "none";
+    // Masquer la page d'enregistrement
+    registerPage.style.display = "none";
+    // Masquer la page de jeu
+    gamePage.style.display = "none";
 }
 
 // Fonction pour mettre à jour l'image du Tamagotchi
@@ -349,11 +377,32 @@ function displayProgressTitle(category) {
     }
 }
 
+function changeSettings(settings) {
+    if (settings === "musique") {
+        if (localStorage.getItem("musique") === "true") {
+            localStorage.setItem("musique", "false");
+        } else {
+            const musique = new Audio("./assets/sounds/musique.mp3");
+            musique.loop = true;
+            musique.play();
+            localStorage.setItem("musique", "true");
+        }
+    } else if (settings === "audio") {
+        if (localStorage.getItem("audio") === "true") {
+            localStorage.setItem("audio", "false");
+        } else {
+            const audio = new Audio("./assets/sounds/audio.mp3");
+            audio.play();
+            localStorage.setItem("audio", "true");
+        }
+    }
+}
+
 // Création des événements
 initGame();
 launchGameButton.addEventListener("click", showMenuPage);
 startGameButton.addEventListener("click", showSavePage);
-// settingsButton.addEventListener("click", showSettingsPage);
+settingsButton.addEventListener("click", showSettingsPage);
 githubButton.addEventListener("click", () => {
     window.open("https://github.com/enioaiello/tamagotchi", "_blank");
 });
@@ -361,6 +410,7 @@ newSaveButton.addEventListener("click", showRegisterPage);
 loadSaveButton.addEventListener("click", loadSave);
 registerNameButton.addEventListener("click", registerName);
 backSaveButton.addEventListener("click", showMenuPage);
+backSettingsButton.addEventListener("click", showMenuPage);
 feedButton.addEventListener("click", () => {
     if (myTamagotchi.hunger < 100) {
         myTamagotchi.hunger += 10;
@@ -377,7 +427,7 @@ happinessButton.addEventListener("click", () => {
         if (myTamagotchi.happiness > 100) {
             myTamagotchi.happiness = 100;
         }
-        hungerProgress.value = myTamagotchi.happiness;
+        happinessProgress.value = myTamagotchi.happiness;
         displayProgressTitle("happiness");
     }
 });
@@ -387,15 +437,17 @@ healthButton.addEventListener("click", () => {
         if (myTamagotchi.health > 100) {
             myTamagotchi.health = 100;
         }
-        hungerProgress.value = myTamagotchi.health;
+        healthProgress.value = myTamagotchi.health;
         displayProgressTitle("health");
     }
 });
 saveGameButton.addEventListener("click", saveGame);
 deleteGameButton.addEventListener("click", () => {
     document.querySelector("#tamagotchiContent img").src = "./assets/img/explosion.png";
-    const explosion = new Audio("./assets/sounds/explosion.mp3");
-    explosion.play();
+    if (localStorage.getItem("audio") === "true") {
+        const audio = new Audio("./assets/sounds/explosion.mp3");
+        audio.play();
+    }
 
     setTimeout(() => {
         localStorage.clear();

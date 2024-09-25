@@ -24,7 +24,7 @@
             <h2>Menu</h2>
             <div id="buttons">
                 <button id="startGame" title="Démarrer"><i class="fa-solid fa-play"></i></button>
-                <button id="settings" title="Paramètres"><i class="fa-solid fa-gear"></i></button>
+                <button id="settings" title="Paramètres" style="display: none"><i class="fa-solid fa-gear"></i></button>
                 <button id="github" title="Code source"><i class="fa-brands fa-github"></i></button>
             </div>
         </div>
@@ -61,6 +61,24 @@
                 </label>
                 <button id="registerName" title="Continuer"><i class="fa-solid fa-check"></i></button>
             </form>
+        </div>
+        <div id="settingsPage">
+            <h2>Paramètres</h2>
+            <div id="settingsName">
+                <div id="soundCategory">
+                    <label id="music">
+                        <input type="checkbox" id="musicInput">
+                        <span>Musique</span>
+                    </label>
+                    <label id="sound">
+                        <input type="checkbox" id="soundInput">
+                        <span>Son</span>
+                    </label>
+                </div>
+                <div id="backSettings" title="Revenir au menu">
+                    <i class="fa-solid fa-door-open"></i>
+                </div>
+            </div>
         </div>
         <div id="game">
             <div id="tamagotchi">

@@ -159,7 +159,9 @@ body .container #menu #buttons #settings,
 body .container #menu #buttons #github,
 body .container #save #saves #newSave,
 body .container #save #saves #loadSave,
-body .container #save #saves #backSave {
+body .container #save #saves #backSave,
+body .container #settingsPage #settingsName #backSettings,
+body .container #settingsPage #settingsName #soundCategory {
     width: 150px;
     height: 150px;
     display: flex;
@@ -181,7 +183,8 @@ body .container #menu #buttons #settings:hover,
 body .container #menu #buttons #github:hover,
 body .container #save #saves #newSave:hover,
 body .container #save #saves #loadSave:hover,
-body .container #save #saves #backSave:hover {
+body .container #save #saves #backSave:hover,
+body .container #settingsPage #settingsName #backSettings:hover {
     background-color: #0c2c4e;
 }
 
@@ -243,6 +246,65 @@ body .container #register form button {
 
 body .container #register form button:hover {
     background-color: #0c2c4e;
+}
+
+body .container #settingsPage {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body .container #settingsPage * {
+    margin: 2vh 0;
+}
+
+body .container #settingsPage h2 {
+    width: 100%;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+body .container #settingsPage #settingsName {
+    width: 100%;
+    /*height: 80vh;*/
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+body .container #settingsPage #settingsName form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+body .container #settingsPage #settingsName #soundCategory {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    cursor: default;
+}
+
+body .container #settingsPage #settingsName #soundCategory label {
+    font-size: 1.3rem;
+    text-align: center;
+    cursor: pointer;
+    margin: 0;
+}
+
+body .container #settingsPage #settingsName #backSettings {
+    width: 15px;
+    height: 15px;
 }
 
 body .container #game {
